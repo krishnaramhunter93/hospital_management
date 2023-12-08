@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +71,18 @@ public class DoctorController {
 
 	}
 
+	@GetMapping(value = "/findall")
+	public ResponseEntity<?> getAllDoctor() {
+		try {
+			List<Doctor> doctorList = doctorService.findAllDoctor();
+			return ResponseEntity.ok().body(doctorList);
+
+		} catch (Exception e) {
+			return ResponseEntity.internalServerError().body("no doctor found");
+
+		}
+	}
+
 	@GetMapping(value = "/count")
 	public ResponseEntity<?> countDoctor() {
 		try {
@@ -80,4 +94,5 @@ public class DoctorController {
 			return ResponseEntity.internalServerError().body("No doctor present");
 		}
 	}
+
 }
