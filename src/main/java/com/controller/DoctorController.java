@@ -45,28 +45,39 @@ public class DoctorController {
 		}
 	}
 
-	
-	@GetMapping(value="/find/{doctorId}")
-	public ResponseEntity<?> getDoctorById(@PathVariable("doctorId") Long doctorId){
-		
-		DoctorResponse doctorResponse=new DoctorResponse();
-		
+	@GetMapping(value = "/find/{doctorId}")
+	public ResponseEntity<?> getDoctorById(@PathVariable("doctorId") Long doctorId) {
+
+		DoctorResponse doctorResponse = new DoctorResponse();
+
 		try {
-		Doctor doctor=doctorService.getDoctorById(doctorId);
-		logger.info("doctor fetch successfully");
-		doctorResponse.setData(doctor);
-		doctorResponse.setCode(HttpStatus.OK.toString());
-		doctorResponse.setMessage("doctor record is in database");
-		
-		
-		return ResponseEntity.ok().body(doctorResponse);
-		}catch (Exception e) {
+			Doctor doctor = doctorService.getDoctorById(doctorId);
+			logger.info("doctor fetch successfully");
+			doctorResponse.setData(doctor);
+			doctorResponse.setCode(HttpStatus.OK.toString());
+			doctorResponse.setMessage("doctor record is in database");
+
+			return ResponseEntity.ok().body(doctorResponse);
+		} catch (Exception e) {
 			doctorResponse.setData(null);
 			doctorResponse.setCode(HttpStatus.OK.toString());
 			doctorResponse.setMessage("doctor record is not in database");
-			
+
 			return ResponseEntity.internalServerError().body("doctor trying to find is not found inside database!");
 
+		}
+
+	}
+
+	@GetMapping(value = "/count")
+	public ResponseEntity<?> countDoctor() {
+		try {
+			long totalDoctor = doctorService.countDoctor();
+
+			return ResponseEntity.ok().body("The total number of doctors present in database are " + totalDoctor);
+		} catch (Exception e) {
+
+			return ResponseEntity.internalServerError().body("No doctor present");
 		}
 	}
 }
