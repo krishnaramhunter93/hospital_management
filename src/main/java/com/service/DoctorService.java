@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.List;
+
 import com.dto.DoctorDto;
 import com.model.Doctor;
 
@@ -10,5 +12,7 @@ public interface DoctorService {
 	Doctor getDoctorById(Long doctorId);
 
 	long countDoctor();
+
+	List<Doctor> findAllDoctor();
 
 }
