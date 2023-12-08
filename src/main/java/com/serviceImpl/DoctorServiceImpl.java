@@ -46,4 +46,15 @@ public class DoctorServiceImpl implements DoctorService{
 		return doctor;
 	}
 
+
+	@Override
+	public long countDoctor() {
+		long totalDoctor=doctorRepository.count();
+		if(totalDoctor==0) {
+			throw new RuntimeException();
+			
+		}
+		return totalDoctor;
+	}
+
 }
