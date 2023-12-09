@@ -67,4 +67,13 @@ public class DoctorServiceImpl implements DoctorService {
 		return doctorList;
 	}
 
+	@Override
+	public Doctor getDoctorWithEmail(String doctorEmail) {
+		Doctor doctorList=doctorRepository.findDoctorWithEmail(doctorEmail);
+		if(doctorList==null) {
+			throw new RuntimeException();
+		}
+		return doctorList;
+	}
+
 }

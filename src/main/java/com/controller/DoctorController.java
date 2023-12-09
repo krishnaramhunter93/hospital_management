@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dto.DoctorDto;
@@ -27,6 +28,11 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 
+	/*
+	 * 
+	 * test for revert the code
+	 * 
+	 */
 	@PostMapping("/saveDoctor")
 	public ResponseEntity<?> createDoctor(@RequestBody DoctorDto doctorDto) {
 		DoctorResponse doctorResponse = new DoctorResponse();
@@ -95,4 +101,21 @@ public class DoctorController {
 		}
 	}
 
+	@GetMapping(value = "/findbyemail")
+	public ResponseEntity<?> getDoctorWithEmail(@RequestParam("doctorEmail") String doctorEmail) {
+		DoctorResponse doctorResponse = new DoctorResponse();
+		try {
+			Doctor doctor = doctorService.getDoctorWithEmail(doctorEmail);
+			doctorResponse.setData(doctor);
+			doctorResponse.setMessage("this data with email is in database");
+			doctorResponse.setCode(HttpStatus.OK.toString());
+			return ResponseEntity.ok().body(doctor);
+		} catch (Exception e) {
+			doctorResponse.setData(null);
+			doctorResponse.setMessage("this data with email is not in database");
+			doctorResponse.setCode(HttpStatus.OK.toString());
+			return ResponseEntity.internalServerError().body("doctor with email : " + doctorEmail + " is not found");
+
+		}
+	}
 }
