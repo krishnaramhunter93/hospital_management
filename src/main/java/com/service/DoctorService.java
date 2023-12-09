@@ -17,4 +17,6 @@ public interface DoctorService {
 
 	Doctor getDoctorWithEmail(String email);
 
+	void deleteDoctorById(Long doctorId);
+
 }
