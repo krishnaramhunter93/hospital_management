@@ -15,4 +15,6 @@ public interface DoctorService {
 
 	List<Doctor> findAllDoctor();
 
+	Doctor getDoctorWithEmail(String email);
+
 }
