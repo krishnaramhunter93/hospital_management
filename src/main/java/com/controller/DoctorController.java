@@ -29,11 +29,6 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 
-	/*
-	 * 
-	 * test for revert the code
-	 * 
-	 */
 	@PostMapping("/saveDoctor")
 	public ResponseEntity<?> createDoctor(@RequestBody DoctorDto doctorDto) {
 		DoctorResponse doctorResponse = new DoctorResponse();
@@ -120,7 +115,7 @@ public class DoctorController {
 		}
 	}
 
-	@DeleteMapping(value="/delete/{doctorId}")
+	@DeleteMapping(value = "/delete/{doctorId}")
 	public ResponseEntity<?> deleteDoctorById(@PathVariable("doctorId") Long doctorId) {
 
 		try {
